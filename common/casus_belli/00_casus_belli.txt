@@ -1,0 +1,214 @@
+#my_casus_belli = {
+#	potential = { ... }		# trigger to make some CBs invalid for certain types of countries; this = attacker (CB owner); default: { always = yes }
+#	is_valid = { ... }		# trigger, evaluated daily to check if CB should be created or destroyed automatically, does not affect CBs granted via script;
+#								# this = attacker (CB owner), from = defender (target country); default: { always = yes }
+#	destroy_if = { ... }	# trigger, evaluated daily to destroy CBs that have been granted via script ahead of expiration date;
+#								# this = attacker (CB owner), from = defender (target country); default: { always = no }
+#	show_notification = no/yes	# optional (default = yes), flag to control whether this CB will generate a notification (to avoid duplicate 
+# 								# notification when a claim CB is generated)
+#}
+
+
+cb_claim = {
+	show_in_diplomacy = yes
+	show_notification = no
+	potential = {
+		is_country_type = default	
+	}
+	is_valid = {
+		has_claim = FROM
+		has_total_war_cb = no
+		OR = {
+			is_subject = no
+			overlord = { NOT = { is_same_value = from } }
+		}
+	}
+}
+
+cb_subjugation = {
+	show_in_diplomacy = yes
+	show_notification = yes
+	potential = {
+		OR = {
+			is_country_type = default
+			is_country_type = awakened_fallen_empire
+		}
+		is_subject = no
+	}
+	is_valid = { 
+		is_country_type = awakened_fallen_empire 
+		NOT = { has_authority = auth_machine_intelligence }
+		has_total_war_cb = no
+		OR = {
+			is_subject = no
+			overlord = { NOT = { is_same_value = from } }
+		}
+	}	
+}
+
+cb_humiliation = {
+	show_in_diplomacy = no
+	show_notification = no
+	potential = {
+		OR = {
+			is_country_type = default
+			is_country_type = fallen_empire
+		}
+	}
+	is_valid = {	
+		OR = {
+			NOT = { has_policy_flag = liberation_wars }
+			from = { has_ethic = ethic_gestalt_consciousness }
+		}
+		is_rival = FROM
+		has_total_war_cb = no
+		OR = {
+			is_subject = no
+			overlord = { NOT = { is_same_value = from } }
+		}
+	}
+}
+
+cb_ideology = {
+	show_in_diplomacy = no
+	show_notification = no
+	potential = {
+		is_country_type = default
+		NOT = { has_ethic = ethic_gestalt_consciousness }
+	}
+	is_valid = {	
+		has_policy_flag = liberation_wars
+		is_rival = FROM
+		from = { NOT = { has_ethic = ethic_gestalt_consciousness } }
+		has_total_war_cb = no
+		OR = {
+			is_subject = no
+			overlord = { NOT = { is_same_value = from } }
+		}		
+	}
+}
+
+cb_purification = {
+	show_in_diplomacy = yes
+	show_notification = yes
+	potential = {
+		OR = {
+			is_berserk_fallen_machine_empire = yes
+			has_valid_civic = civic_fanatic_purifiers
+			has_valid_civic = civic_machine_terminator	
+		}		
+	}
+	is_valid = {
+		has_total_war_cb = yes
+		OR = {
+			is_berserk_fallen_machine_empire = yes
+			is_neighbor_of = from
+		}
+		OR = {
+			is_subject = no
+			overlord = { NOT = { is_same_value = from } }
+		}		
+	}
+}
+
+cb_hunger = {
+	show_in_diplomacy = yes
+	show_notification = yes
+	potential = {
+		is_country_type = default	
+		has_valid_civic = civic_hive_devouring_swarm	
+	}
+	is_valid = {
+		has_total_war_cb = yes
+		is_neighbor_of = from
+		OR = {
+			is_subject = no
+			overlord = { NOT = { is_same_value = from } }
+		}
+	}
+}
+
+cb_despoliation = {
+	show_in_diplomacy = yes
+	show_notification = yes
+	potential = {
+		is_country_type = default	
+		has_valid_civic = civic_barbaric_despoilers
+	}
+	is_valid = {
+		is_neighbor_of = from
+		OR = {
+			is_subject = no
+			overlord = { NOT = { is_same_value = from } }
+		}
+	}
+}
+
+cb_colossus = {
+	show_in_diplomacy = yes
+	show_notification = yes
+	potential = {
+		is_country_type = default	
+		has_technology = "tech_colossus"
+	}
+	is_valid = {
+		has_total_war_cb = yes
+		is_rival = from
+		OR = {
+			is_subject = no
+			overlord = { NOT = { is_same_value = from } }
+		}		
+	}
+}
+
+cb_stop_colossus = {
+	show_in_diplomacy = yes
+	show_notification = yes
+	potential = {
+		is_country_type = default	
+		NOT = { has_technology = "tech_colossus" }
+		exists = from
+		from = { has_technology = "tech_colossus" }
+	}
+	is_valid = {
+		has_total_war_cb = yes
+		is_rival = from
+		OR = {
+			is_subject = no
+			overlord = { NOT = { is_same_value = from } }
+		}		
+	}
+}
+
+cb_containment = {
+	show_in_diplomacy = yes
+	show_notification = yes
+	potential = {
+		is_country_type = default	
+		NOR = {
+			has_valid_civic = civic_fanatic_purifiers
+			has_valid_civic = civic_machine_terminator	
+			has_valid_civic = civic_hive_devouring_swarm
+		}
+	}
+	is_valid = {
+		has_total_war_cb = yes
+		is_neighbor_of = from
+		OR = {
+			is_subject = no
+			overlord = { NOT = { is_same_value = from } }
+		}		
+	}
+}
+
+cb_subject = {
+	show_in_diplomacy = no
+	show_notification = no
+	potential = {
+		is_country_type = default
+		is_subject = yes
+	}
+	is_valid = {
+		overlord = { is_same_value = from }
+	}
+}
