@@ -1,0 +1,8 @@
+
+@bats_trait_points = 4
+@bats_max_traits = 8
+
+BATPONIES = {
+	bats_trait_points = @species_trait_points
+	bats_max_traits = @species_max_traits
+}

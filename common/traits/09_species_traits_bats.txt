@@ -1,0 +1,35 @@
+bat_trait_very_strong = {
+	cost = 3
+	opposites = { "bat_trait_weak" "bat_trait_strong" }
+	allowed_archetypes = { BATPONIES }
+	modifier = {
+		army_damage_mult = 0.40
+		tile_resource_minerals_mult = 0.10
+		leader_age = 15
+	}
+}
+
+bat_trait_strong = {
+	cost = 1
+	opposites = { "bat_trait_weak" "bat_trait_very_strong" }
+	allowed_archetypes = { BATPONIES }
+	modifier = {
+		army_damage_mult = 0.20
+		tile_resource_minerals_mult = 0.05
+		leader_age = 5
+	}
+}
+
+bat_trait_weak = {
+	cost = -1
+	opposites = { "bat_trait_strong" "bat_trait_very_strong" }
+	allowed_archetypes = { BATPONIES }
+	modifier = {
+		army_damage_mult = -0.20
+		tile_resource_minerals_mult = -0.05
+		leader_age = -10
+	}
+	ai_weight = {
+		weight = 0
+	}
+}
