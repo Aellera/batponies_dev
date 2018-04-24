@@ -1,7 +1,13 @@
 bat_trait_very_strong = {
+	initial = yes
+	randomized = yes
+	
 	cost = 3
+	
 	opposites = { "bat_trait_weak" "bat_trait_strong" }
+	
 	allowed_archetypes = { BATPONIES }
+	
 	modifier = {
 		army_damage_mult = 0.40
 		tile_resource_minerals_mult = 0.10
@@ -10,9 +16,15 @@ bat_trait_very_strong = {
 }
 
 bat_trait_strong = {
+	initial = yes
+	randomized = yes
+	
 	cost = 1
+	
 	opposites = { "bat_trait_weak" "bat_trait_very_strong" }
+	
 	allowed_archetypes = { BATPONIES }
+	
 	modifier = {
 		army_damage_mult = 0.20
 		tile_resource_minerals_mult = 0.05
@@ -21,15 +33,42 @@ bat_trait_strong = {
 }
 
 bat_trait_weak = {
+	initial = yes
+	randomized = yes
+	
 	cost = -1
+	
 	opposites = { "bat_trait_strong" "bat_trait_very_strong" }
+	
 	allowed_archetypes = { BATPONIES }
+	
 	modifier = {
 		army_damage_mult = -0.20
 		tile_resource_minerals_mult = -0.05
 		leader_age = -10
 	}
+	
 	ai_weight = {
 		weight = 0
+	}
+}
+
+bat_trait_psionic = {
+	cost = 0
+	icon = "gfx/interface/icons/traits/trait_psionic_species.dds"
+
+	initial = yes
+	randomized = yes
+	modification = no
+
+	allowed_archetypes = { BATPONIES }
+	
+	modifier = {
+		tile_resource_engineering_research_mult = 0.10
+		tile_resource_physics_research_mult = 0.10
+		tile_resource_society_research_mult = 0.10
+		tile_resource_energy_mult = 0.10
+		pop_happiness = 0.05
+		leader_age = 40
 	}
 }
